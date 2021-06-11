@@ -14,14 +14,17 @@ function getRandomNumber(min, max) {
     
 }
 
-function isInArray(element, array){
-    for(i=0; i<array.length; i++){
-        if(element === array[i]){
-            return true;
-        }
-    }
-    return false;
-}
+// Funzione rindondante, esiste già .includes()
+//
+// function isInArray(element, array){
+//     for(i=0; i<array.length; i++){
+//         if(element === array[i]){
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
 var min=1;
 var max=100;
 var difficoltà=parseInt(prompt("Inserisci un livello di difficoltà da 0 (facile) a 2(difficile)"));
@@ -46,7 +49,8 @@ var generatedNumbers = [];
 // Computer-generated numbers 
 for(var k=1; k<=16; k++){
     var generatedNum=getRandomNumber(min,max);
-    if(isInArray(generatedNum, generatedNumbers)){
+    // if(isInArray(generatedNum, generatedNumbers)){
+        if(generatedNumbers.includes(generatedNum)){
         console.log("NUMBER ALREADY ADDED. REROLLING...")
         k--;
         continue;
@@ -66,7 +70,8 @@ for(var z=1; z<=(max-16); z++){
     while(input < min || input > max){
         input = parseInt(prompt("Numero non valido. Inserisci un numero tra " + min +" e " + max));
     }
-    while(isInArray(input, insertedNumbers)){
+    // while(isInArray(input, insertedNumbers)){
+        while(insertedNumbers.includes(input)){
         input= parseInt(prompt("Numero già inserito. Inserisci un altro numero tra " + min +" e " + max));
     }
     
@@ -74,7 +79,8 @@ for(var z=1; z<=(max-16); z++){
     insertedNumbers.push(input);
     console.log("Current numbers input:" + insertedNumbers);
 
-    if(isInArray(input,generatedNumbers)){
+    // if(isInArray(input,generatedNumbers)){
+        if(generatedNumbers.includes(input)){
         output.innerHTML += "GAME OVER <br> Score: " + score;
         break;
     }   else{
